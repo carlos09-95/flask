@@ -13,19 +13,20 @@ pipeline {
   stages {
     stage('Git') {
       steps {
-        git(url: 'https://github.com/carlos09-95/flasking.git', branch: 'main')
+        git(url: 'https://github.com/carlos09-95/flask.git', branch: 'main')
       }
     }
 
-stage('Build Stages') {
+
+    stage('Build Stages') {
         steps{
             script {
                 dockerImage = docker.build(registry)
             }
         }
-}
+    }
 
-stage('Deploy Stage'){
+    stage('Deploy Stage'){
         steps{
             script{
                 docker.withRegistry('', registryCredentials){
@@ -33,7 +34,7 @@ stage('Deploy Stage'){
                 }
             }
         }
+    }
+  }        
 }
-            
-
       
